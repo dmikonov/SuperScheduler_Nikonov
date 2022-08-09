@@ -3,6 +3,8 @@ package screens;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SplashScreen extends BaseScreen{
     public SplashScreen(AppiumDriver<MobileElement> driver) {
@@ -16,5 +18,11 @@ public class SplashScreen extends BaseScreen{
     public String getCurrencyVersion(){
         return versionTextView.getText();
     }
+    public LoginScreen checkCurrentVersion(String version){
+        shouldHave(versionTextView,version,10);
+        return new LoginScreen(driver);
+    }
+
+
 
 }
