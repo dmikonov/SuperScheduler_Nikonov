@@ -22,13 +22,18 @@ public class HomeScreeen extends BaseScreen {
     MobileElement logoutButton;
     @FindBy(xpath = "//*[@resource-id='com.example.svetlana.scheduler:id/fab_add_event']")
     MobileElement fabAddEvent;
+    @FindBy(xpath = "//*[@resource-id='com.example.svetlana.scheduler:id/row_container_main']")
+    List<MobileElement> event;
+    @FindBy(xpath = "//*[@resource-id='com.example.svetlana.scheduler:id/delete_menu']")
+    MobileElement delete;
 
-    public EditCreateEventScreen initCreationEvent(){
-        should(fabAdd,10);
+    public EditCreateEventScreen initCreationEvent() {
+        should(fabAdd, 10);
         fabAdd.click();
         fabAddEvent.click();
         return new EditCreateEventScreen(driver);
     }
+
     public boolean isFabAddPresent() {
         should(fabAdd, 10);
         return fabAdd.isDisplayed();
@@ -61,5 +66,21 @@ public class HomeScreeen extends BaseScreen {
         return this;
     }
 
+    public boolean deleteEvent() {
+        should(fabAdd, 10);
+        int before = event.size();
+        event.get(0).click();
+        should(delete, 10);
+        delete.click();
+        int after = event.size();
+        boolean res = checkEventDeleted(before, after);
+        return res;
+    }
 
+    public boolean checkEventDeleted(int before, int after) {
+        if (before - after == 1) {
+            return true;
+        }
+        return false;
+    }
 }
