@@ -6,6 +6,7 @@ import models.User;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.time.Duration;
 
@@ -25,6 +26,8 @@ public class LoginScreen extends BaseScreen {
 
     @FindBy(xpath = "//*[@resource-id='android:id/message']")
     MobileElement errorMessage;
+    @FindBy (xpath = "//*[@resource-id='android:id/button1']")
+    MobileElement okBtn;
 
     public LoginScreen fillEmail(String email) {
         should(emailEditText, 10);
@@ -60,9 +63,23 @@ public class LoginScreen extends BaseScreen {
         return new HomeScreeen(driver);
     }
 
-  //  public HomeScreeen checkErrorMessage(String error) {
-  //      shouldHave(errorMessage, error, 10);
- //       return new HomeScreeen(driver);
- //   }
+    public LoginScreen complexLoginNegative(User user) {
+        new WebDriverWait(driver, 15).until(ExpectedConditions.visibilityOf(emailEditText));
+        type(emailEditText, user.getEmail());
+        type(passwordEditText, user.getPassword());
+        driver.hideKeyboard();
+        loginButton.click();
+        return this;
+    }
+
+    public LoginScreen checkErrorMessage(String error) {
+        shouldHave(errorMessage, error, 10);
+        Assert.assertEquals(errorMessage.getText(), error);
+        return this;
+    }
+    public LoginScreen confirmError(){
+        okBtn.click();
+        return this;
+    }
 
 }

@@ -44,23 +44,17 @@ public class LoginTest extends Configuration {
         Assert.assertTrue(addPresent);
     }
 
-
- //   public void loginNegativeModelWrongPassword() {
- //       User user = User.builder()
-//                .email("d020797@gmail.com")
- //               .password("Ww12346$")
-  //              .build();
-   //     boolean addPresent = new LoginScreen(driver)
-  //              .complexLogin(user)
-   //             .checkErrorMessage("Wrong email or password");
-   //     Assert.assertTrue(addPresent);
-
-        //    new LoginScreen(driver)
-        // .complexLogin(user)
-        //.isFabAddPresent()
-        //.checkErrorMessage("Wrong email or password")
-        //.confirmError(); //check ok btn
-//    }
+    @Test
+    public void loginNegativeModelWrongPassword() {
+        User user = User.builder()
+                .email("d020797@gmail.com")
+                .password("Ww12346$")
+                .build();
+        new LoginScreen(driver)
+                .complexLoginNegative(user)
+                .checkErrorMessage("Wrong email or password")
+                .confirmError();
+    }
 
     @AfterMethod
     public void postCondtidion() {

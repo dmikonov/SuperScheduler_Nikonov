@@ -12,24 +12,34 @@ public class BaseScreen {
 
     public BaseScreen(AppiumDriver<MobileElement> driver) {
         this.driver = driver;
-        PageFactory.initElements(new AppiumFieldDecorator(driver),this);
+        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
-    public void type(MobileElement element, String text){
-        if(text != null){
+    public void type(MobileElement element, String text) {
+        if (text != null) {
             element.click();
             element.clear();
             element.sendKeys(text);
         }
     }
-    public void shouldHave(MobileElement element,String text,int time){
-        new WebDriverWait(driver,time)
-                .until(ExpectedConditions.textToBePresentInElement(element,text));
+
+    public void shouldHave(MobileElement element, String text, int time) {
+        new WebDriverWait(driver, time)
+                .until(ExpectedConditions.textToBePresentInElement(element, text));
     }
 
-    public void should(MobileElement element,int time){
-        new WebDriverWait(driver,time)
+    public void should(MobileElement element, int time) {
+        new WebDriverWait(driver, time)
                 .until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public boolean isDisplayedWithExp(MobileElement element) {
+        try {
+            should(element, 5);
+            return element.isDisplayed();
+        } catch (Exception ex) {
+            return false;
+        }
     }
 
 }
