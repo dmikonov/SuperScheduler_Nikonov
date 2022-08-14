@@ -21,8 +21,6 @@ public class DeleteEventTest extends Configuration {
         Boolean res = new HomeScreeen(driver)
                 .deleteEvent();
         Assert.assertTrue(res);
-
-
     }
 
     @AfterClass

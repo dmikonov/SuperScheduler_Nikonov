@@ -28,4 +28,16 @@ public class EventCreateTest2 extends Configuration {
                 .openMenu()
                 .logout();
     }
+
+    @Test
+    public void createNewEventAction() {
+        new LoginScreen(driver)
+                .complexLogin(User.builder().email("d020797@gmail.com").password("Ww12345$").build())
+                .initCreationEvent()
+                .selectDataAction("18/08/2022")
+                .createNewEvent(Event.builder().title("New title").type("My type").breaks(3).wage(60).build())
+                .checkFabButtonPresentAssert()
+                .openMenu()
+                .logout();
+    }
 }

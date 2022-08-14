@@ -38,6 +38,7 @@ public class LoginTest extends Configuration {
                 .email("d020797@gmail.com")
                 .password("Ww12345$")
                 .build();
+        logger.info("Test start with user ---> "+user.toString());
         boolean addPresent = new LoginScreen(driver)
                 .complexLogin(user)
                 .isFabAddPresent();

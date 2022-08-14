@@ -41,5 +41,12 @@ public class BaseScreen {
             return false;
         }
     }
+    public void pause(int time){
+        try {
+            Thread.sleep(time);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }
